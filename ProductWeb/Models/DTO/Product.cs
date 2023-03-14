@@ -23,12 +23,12 @@ namespace ProductWeb.Models.DTO
         [MaxLength(200)]
         public byte Price { get; set; }
 
-        [NotMapped]
+        //[NotMapped]
         [DataType(DataType.Date)]
-        public DateOnly createdOn { get; set; }
+        public DateTime? createdOn { get; set; }
 
-        [NotMapped]
+        //[NotMapped]
         [DataType(DataType.Date)]
-        public DateOnly updatedOn { get; set; }
+        public DateTime? updatedOn { get; set; }
     }
 }
