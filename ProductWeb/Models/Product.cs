@@ -8,16 +8,17 @@ namespace ProducWeb.Models
 		[Key]
 		public int Id { get; set; }
 
-		[Required]
+		[Required(ErrorMessage = "This field is required")]
 		[MinLength(3)]
 		[StringLength(50)]
-		public string Name { get; set; }
+        [RegularExpression("^((?!^Name$)[a-zA-Z '])+$", ErrorMessage = "The field is not a valid name")]
+        public string Name { get; set; }
 
-		[Required]
+		[Required(ErrorMessage = "This field is required")]
 		[StringLength(200)]
 		public string Description { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "This field is required")]
         [Range(1, 200, ErrorMessage = "Price has to be between 1 and 200.")]
 		public int Price { get; set; }
 
