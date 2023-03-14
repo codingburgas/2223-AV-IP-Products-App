@@ -23,5 +23,10 @@ namespace ProductWeb.Service
         {
             return await _productCrud.UpdateAsync(model);
         }
+
+        public async Task<Product> GetByIdAsync(int id)
+        {
+            return await _productCrud.GetByIdAsync(id);
+        }
     }
 }

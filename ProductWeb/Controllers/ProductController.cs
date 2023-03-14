@@ -22,9 +22,9 @@ namespace ProductWeb.Controllers
             return View(await result);
         }
 
-        public async Task<ActionResult> Edit(string id)
+        public async Task<ActionResult> Edit(int id)
         {
-            var model = 
+            var model = await this._productService.GetByIdAsync(id);
 
             if (model == null)
             {
