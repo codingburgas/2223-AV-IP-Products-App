@@ -22,7 +22,8 @@ namespace ProductWeb.Controllers
         // GET: Products
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Product.ToListAsync());
+            
+              return View(await _context.Product.OrderBy(prod => prod.Price).ToListAsync());
         }
 
         // GET: Products/Details/5

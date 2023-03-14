@@ -17,7 +17,8 @@ namespace ProducWeb.Models
 		[StringLength(200)]
 		public string Description { get; set; }
 
-		[Range(1, 200, ErrorMessage = "Price has to be between 1 and 200.")]
+        [Required]
+        [Range(1, 200, ErrorMessage = "Price has to be between 1 and 200.")]
 		public int Price { get; set; }
 
 		public DateTime CreatedAt { get; set; }
