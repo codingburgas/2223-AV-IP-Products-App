@@ -14,9 +14,11 @@ namespace ProductWeb.Repository.Implementation
             this._databaseContext = databaseContext;
         }
 
-        public virtual async Task<ICollection<Product>> GetAll()
+        public virtual async Task<ICollection<Product>> GetAllAsync()
         {
-            return await _databaseContext.products.ToListAsync();
+            return await _databaseContext.
+                products.
+                ToListAsync();
         }
     }
 }

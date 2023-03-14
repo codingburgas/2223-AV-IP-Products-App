@@ -1,0 +1,67 @@
+﻿@model IEnumerable<ProductWeb.Models.DTO.Product>
+<!DOCTYPE html>
+
+<h1>Index</h1>
+
+<a class="btn btn-dark" asp-action="Create">Create</a> |
+
+<table class="table table-dark table-hover" table-layout: auto;>
+    <thead>
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+
+            <th>
+                CREATED ON
+            </th>
+
+            <th>
+                UPDATED ON
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.createdOn)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.updatedOn)
+                </td>
+
+                <td>
+                    <a class="btn btn-light" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a class="btn btn-light" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
