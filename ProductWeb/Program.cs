@@ -1,4 +1,9 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using ProductWeb.Data;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<ProductWebContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("ProductWebContext") ?? throw new InvalidOperationException("Connection string 'ProductWebContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
