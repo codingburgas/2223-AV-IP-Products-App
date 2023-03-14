@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using ProductWeb.Models.DTO;
 
 namespace ProductWeb.Models.Domain
 {
@@ -8,5 +9,7 @@ namespace ProductWeb.Models.Domain
         {
             
         }
+
+        public DbSet<Product> products { get; set; }
     }
 }

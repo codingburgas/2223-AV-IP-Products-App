@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ProductWeb.Models.DTO
 {
@@ -22,8 +23,12 @@ namespace ProductWeb.Models.DTO
         [MaxLength(200)]
         public byte Price { get; set; }
 
+        [NotMapped]
+        [DataType(DataType.Date)]
         public DateOnly createdOn { get; set; }
 
+        [NotMapped]
+        [DataType(DataType.Date)]
         public DateOnly updatedOn { get; set; }
     }
 }
