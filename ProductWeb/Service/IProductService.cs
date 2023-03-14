@@ -5,5 +5,6 @@ namespace ProductWeb.Service
     public interface IProductService
     {
         public Task<ICollection<Product>> GetAllAsync();
+        public Task<Status> UpdateAsync(EditProduct model);
     }
 }

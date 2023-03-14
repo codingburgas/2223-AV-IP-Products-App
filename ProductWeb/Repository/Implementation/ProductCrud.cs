@@ -20,5 +20,26 @@ namespace ProductWeb.Repository.Implementation
                 products.
                 ToListAsync();
         }
+
+        public virtual async Task<Status> UpdateAsync(EditProduct item)
+        {
+            var status = new Status();
+
+            try
+            {
+                _databaseContext.products.Update(item);
+                await _databaseContext.SaveChangesAsync();
+
+                status.Code = 1;
+                status.Message = "Product has been updated successfully!";
+                return status;
+            }
+            catch (Exception)
+            {
+                status.Code = 0;
+                status.Message = "Product has not been updated successfully!";
+                return status;
+            }
+        }
     }
 }

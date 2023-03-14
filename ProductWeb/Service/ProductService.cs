@@ -18,5 +18,10 @@ namespace ProductWeb.Service
         {
             return await _productCrud.GetAllAsync();
         }
+
+        public async Task<Status> UpdateAsync(EditProduct model)
+        {
+            return await _productCrud.UpdateAsync(model);
+        }
     }
 }
