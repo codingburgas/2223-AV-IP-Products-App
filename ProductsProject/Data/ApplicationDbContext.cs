@@ -10,6 +10,6 @@ namespace ProductsProject.Data
             
         }
 
-        public DbSet<Products>? Products { get; set; }   
+        public DbSet<Products> Products { get; set; }
     }
 }
