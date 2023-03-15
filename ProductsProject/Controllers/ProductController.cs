@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using ProductsProject.Data;
 using ProductsProject.Models;   
 
@@ -18,5 +19,28 @@ namespace ProductsProject.Controllers
             IEnumerable<Product> objProductList = _db.Products;
             return View(objProductList);
         }
+
+        //GET
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+
+        //POST
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(Product obj)
+        {
+            
+            if (ModelState.IsValid)
+            {
+                _db.Products.Add(obj);
+                _db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(obj);
+        }
+
     }
 }
