@@ -41,11 +41,5 @@ namespace ProductWeb.Repository.Implementation
                 return status;
             }
         }
-
-        public virtual async Task<Product> GetByIdAsync(int id)
-        {
-            return await _databaseContext.products
-                .FindAsync(id);
-        }
     }
 }

@@ -6,6 +6,5 @@ namespace ProductWeb.Repository.Interface
     {
         Task<ICollection<Product>> GetAllAsync();
         Task<Status> UpdateAsync(EditProduct item);
-        Task<Product> GetByIdAsync(int id);
     }
 }
