@@ -58,6 +58,9 @@ namespace ProductWeb.Controllers
         {
             if (ModelState.IsValid)
             {
+                var res = await _context.Product.ToListAsync();
+                res = res.Where(p => p.Name == product.Name).ToList();
+                if(res.Count>0) return View(product);
                 product.DateOfCreation=DateTime.Now;
                 product.DateOfLastCahnge=DateTime.Now;
                 _context.Add(product);
