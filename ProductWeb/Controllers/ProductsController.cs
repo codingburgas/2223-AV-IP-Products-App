@@ -60,7 +60,11 @@ namespace ProductWeb.Controllers
             {
                 var res = await _context.Product.ToListAsync();
                 res = res.Where(p => p.Name == product.Name).ToList();
-                if(res.Count>0) return View(product);
+                if(res.Count>0)
+                {
+                    ModelState.AddModelError("Name", "Name must be unique");
+                    return View(product);
+                }
                 product.DateOfCreation=DateTime.Now;
                 product.DateOfLastCahnge=DateTime.Now;
                 _context.Add(product);
@@ -103,6 +107,14 @@ namespace ProductWeb.Controllers
                 try
                 {
                     product.DateOfLastCahnge = DateTime.Now;
+                    var res = await _context.Product.ToListAsync();
+                    res = res.Where(p => p.Name == product.Name).ToList();
+                    if (res.Count > 0) 
+                    {
+                        ModelState.AddModelError("Name", "Name must be unique");
+                        return View(product);
+                    }
+                    
                     _context.Update(product);
                     await _context.SaveChangesAsync();
                 }
