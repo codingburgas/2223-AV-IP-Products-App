@@ -1,5 +1,6 @@
 using ProductsProject.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,7 +10,16 @@ builder.Services.AddDbContext<ApplicationDbContext>(options=>options.UseSqlServe
     builder.Configuration.GetConnectionString("DefaultConnection")
     ));
 
+var cultureInfo = new CultureInfo("en-US");
+
+CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
+cultureInfo.NumberFormat.NumberDecimalSeparator = ".";
+cultureInfo.NumberFormat.CurrencyDecimalSeparator = ".";
+
+
 var app = builder.Build();
+app.UseRequestLocalization();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
