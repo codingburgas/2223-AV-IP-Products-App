@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using ProductsProject.Data;
-using ProductsProject.Models;   
+using ProductsProject.Models;
+using System.Data;
 
 namespace ProductsProject.Controllers
 {
@@ -32,7 +33,14 @@ namespace ProductsProject.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(Product obj)
         {
-            
+
+            var existingProduct = _db.Products.FirstOrDefault(p => p.Name == obj.Name);
+            if (existingProduct != null)
+            {
+                ModelState.AddModelError("Name", "A product with this name already exists.");
+                return View(obj);
+            }
+
             if (ModelState.IsValid)
             {
                 _db.Products.Add(obj);
