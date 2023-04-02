@@ -52,6 +52,7 @@ namespace ProductsProject.Controllers
 
 
         //GET
+        [HttpGet]
         public IActionResult Edit(int? id)
         {
             if (id == null || id == 0)
@@ -74,7 +75,14 @@ namespace ProductsProject.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(Product obj)
         {
-            if(ModelState.IsValid)
+            var existingProduct = _db.Products.FirstOrDefault(p => p.Name == obj.Name && p.Id != obj.Id);
+            if (existingProduct != null)
+            {
+                ModelState.AddModelError("Name", "A product with this name already exists.");
+                return View(obj);
+            }
+
+            if (ModelState.IsValid)
             {
                 _db.Products.Update(obj);
                 _db.SaveChanges();
@@ -86,6 +94,7 @@ namespace ProductsProject.Controllers
 
 
         //GET
+        [HttpGet]
         public IActionResult Delete(int? id)
         {
             if (id == null || id == 0)
