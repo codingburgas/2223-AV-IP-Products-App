@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using ProductsProject.Data;
 using ProductsProject.Models;
@@ -70,22 +71,21 @@ namespace ProductsProject.Controllers
         }
 
 
-        //POST
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(Product obj)
         {
-            var existingProduct = _db.Products.FirstOrDefault(p => p.Name == obj.Name && p.Id != obj.Id);
-            if (existingProduct != null)
-            {
-                ModelState.AddModelError("Name", "A product with this name already exists.");
-                return View(obj);
-            }
-
             if (ModelState.IsValid)
             {
-                _db.Products.Update(obj);
+                _db.Products.Attach(obj);
+
+                var entry = _db.Entry(obj);
+                entry.State = EntityState.Modified;
+                entry.Property(e => e.CreatedDate).IsModified = false;
+
+                // Save changes
                 _db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
             return View(obj);
@@ -127,6 +127,23 @@ namespace ProductsProject.Controllers
             _db.SaveChanges();
             return RedirectToAction("Index");
 
+        }
+
+
+        public IActionResult Details(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            var productFromDb = _db.Products.Find(id);
+
+            if (productFromDb == null)
+            {
+                return NotFound();
+            }
+
+            return View(productFromDb);
         }
     }
 }
