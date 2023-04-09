@@ -21,7 +21,7 @@ namespace ProductWeb.Models
         public int Price { get; set; }
 
         [Required]
-        public DateTime DateCreated { get; } = DateTime.Now;
+        public DateTime DateCreated { get; set; } = DateTime.Now;
 
         public DateTime LastEdited { get; set; }
     }
