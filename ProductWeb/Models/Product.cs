@@ -17,12 +17,12 @@ namespace ProductWeb.Models
         public string Description { get; set; }
 
         [Required]
-        [IntegerValidator(MinValue = 1, MaxValue = 200)]
+        [Range(1, 200)]
         public int Price { get; set; }
 
         [Required]
-        public string DateCreated { get; } = DateTime.Now;
+        public DateTime DateCreated { get; } = DateTime.Now;
 
-        public DateTime LastEdited { get; set; } ;
+        public DateTime LastEdited { get; set; }
     }
 }
